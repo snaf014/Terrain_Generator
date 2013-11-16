@@ -1,0 +1,40 @@
+# Project: fractterr
+# Makefile created by Dev-C++ 5.5.2
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+OBJ      = bin/obj/camera.o bin/obj/GLSLshader.o bin/obj/main.o bin/obj/toollib.o bin/obj/PerlinNoise.o
+LINKOBJ  = bin/obj/camera.o bin/obj/GLSLshader.o bin/obj/main.o bin/obj/toollib.o bin/obj/PerlinNoise.o
+LIBS     = -L"C:/Program Files/Dev-Cpp/MinGW32/lib" -L"C:/Program Files/Dev-Cpp/MinGW32/mingw32/lib" -L"C:/Program Files/Dev-Cpp/lib" -static-libstdc++ -static-libgcc -L"C:/Program Files/Dev-Cpp/lib" -L"C:/Program Files/Dev-Cpp/MinGW32/lib" -lglfw3 -lopengl32 -lglew32 -lglu32 -lwinmm  -lgdi32 -lgomp 
+INCS     = -I"C:/Program Files/Dev-Cpp/MinGW32/include" -I"C:/Program Files/Dev-Cpp/include" -I"C:/Program Files/Dev-Cpp/include" -I"C:/Program Files/Dev-Cpp/MinGW32/include"
+CXXINCS  = -I"C:/Program Files/Dev-Cpp/MinGW32/include" -I"C:/Program Files/Dev-Cpp/MinGW32/lib/gcc/mingw32/4.7.2/include/c++" -I"C:/Program Files/Dev-Cpp/include" -I"C:/Program Files/Dev-Cpp/include" -I"C:/Program Files/Dev-Cpp/MinGW32/include"
+BIN      = bin/fractterr.exe
+CXXFLAGS = $(CXXINCS) -fopenmp
+CFLAGS   = $(INCS) -fopenmp
+RM       = rm -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+bin/obj/camera.o: source/camera.cpp
+	$(CPP) -c source/camera.cpp -o bin/obj/camera.o $(CXXFLAGS)
+
+bin/obj/GLSLshader.o: source/GLSLshader.cpp
+	$(CPP) -c source/GLSLshader.cpp -o bin/obj/GLSLshader.o $(CXXFLAGS)
+
+bin/obj/main.o: source/main.cpp
+	$(CPP) -c source/main.cpp -o bin/obj/main.o $(CXXFLAGS)
+
+bin/obj/toollib.o: source/toollib.cpp
+	$(CPP) -c source/toollib.cpp -o bin/obj/toollib.o $(CXXFLAGS)
+
+bin/obj/PerlinNoise.o: source/PerlinNoise.cpp
+	$(CPP) -c source/PerlinNoise.cpp -o bin/obj/PerlinNoise.o $(CXXFLAGS)

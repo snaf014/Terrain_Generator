@@ -1,5 +1,7 @@
 #include "global.hpp"
 
+int octaves_no = 9;
+
 // generacja listy wyswietlania terenu (tymczasowe rozwi¹zanie)
 void buildList ()
 {
@@ -47,7 +49,24 @@ static void keyCallback (GLFWwindow *window, int key, int scancode, int action, 
 			break;
 			
 			case GLFW_KEY_A: // zlecenie wygenerowania nowej mapy wysokosci
+				pn->newSeed();
 				newMap = true;
+			break;
+			
+			case GLFW_KEY_T: // zlecenie wygenerowania nowej mapy wysokosci
+				if (octaves_no < 9)
+				{
+					octaves_no++;
+					newMap = true;
+				}
+			break;
+			
+			case GLFW_KEY_G: // zlecenie wygenerowania nowej mapy wysokosci
+				if (octaves_no > 0)
+				{
+					octaves_no--;
+					newMap = true;
+				}
 			break;
      
 		}
@@ -64,14 +83,21 @@ void renderSetup ()
 	ar = width / (float) height;
 		
 	glViewport (0, 0, width, height);
-	glClear (GL_COLOR_BUFFER_BIT);
 	
 	glMatrixMode (GL_PROJECTION);
 	glLoadIdentity ();
-	glFrustum(-ar, ar, -1.0, 1.0, 2.0, 10000.0);
+	//glFrustum(-ar, ar, -1.0, 1.0, 2.0, 10000.0);
+	gluPerspective(60,ar,0.1,1000);
 	
 	glMatrixMode (GL_MODELVIEW);
 	glLoadIdentity ();
+		
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_BACK); 
+
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);    
+
 }
 
 float o = 0;
@@ -80,7 +106,10 @@ float o = 0;
 void redrawScene ()
 {
 	renderSetup ();
-
+	
+	glClearColor(0,0,0,1);
+	glClear (GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+    
 	camera->update ();
 	glColor3f (1.0f, 0.0f, 0.0f);
 	glCallList (list);
@@ -121,14 +150,8 @@ int renderingSystem ()
 
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
     
-    glClearColor(0,0,0,1);
-    glEnable(GL_CULL_FACE);
-    glCullFace(GL_BACK); 
-
-    glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LESS);    
     
-    camera->setMoveSpeed(10);
+    camera->setMoveSpeed(2);
     
     int xxx;
     int xxa = 0;
@@ -223,7 +246,7 @@ int renderingSystem ()
     glfwTerminate();
     return (EXIT_SUCCESS);
 	
-}//
+}
 
 int main () 
 {	
@@ -243,10 +266,8 @@ int main ()
 			if (terminateProgram) break;
 			
 			if (newMap) // zosta³o wys³ane ¿¹danie przebudowy terenu
-			{
-				pn->newSeed();
-					
-				if (pn->genTexture(MAP_SIZE, TERRAIN_OCTAVES, 0))
+			{					
+				if (pn->genTexture(MAP_SIZE, octaves_no, 0))
 				{
 					mapka = pn->data;
 					mapkanm = pn->normalmap;

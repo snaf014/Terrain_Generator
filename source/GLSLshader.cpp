@@ -39,6 +39,16 @@ void GLSLprogram::init (const char *vn, const char *fn)
 	glLinkProgram (program);
 	glUseProgram (program);
 }
+
+void GLSLprogram::bind ()
+{
+	glUseProgram (program);
+}
+
+void GLSLprogram::unbind ()
+{
+	glUseProgram (0);
+}
 	
 unsigned int GLSLprogram::loadShader (unsigned int mode)
 {

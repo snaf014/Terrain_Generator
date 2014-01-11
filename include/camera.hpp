@@ -12,12 +12,10 @@ using namespace glm;
 
 class fps_camera
 {
-	private:
-
+	public:
+	
 	float moveSpeed; // prêdkoœæ poruszania kamery do przodu i do ty³u
 	float rotateSpeed; // prêdkoœæ obracania kamery
-
-	public:
 
 	vec3 ref; // punkt, na który skierowana jest kamera
 	vec3 eye; // pozycja kamery

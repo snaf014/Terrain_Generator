@@ -26,6 +26,8 @@ class GLSLprogram
 	~GLSLprogram ();
 	void clean ();
 	void init (const char*, const char*);
+	void bind ();
+	void unbind ();
 	
 	private:
 	

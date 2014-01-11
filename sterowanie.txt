@@ -1,0 +1,20 @@
+STEROWANIE:
+
+w - do przodu
+s - do tylu
+poruszanie mysza - zmiana orientacji kamery
+
+r - zwiekszenie wysokosci terenu
+f - zmniejszenie wysokosci terenu
+
+t - zwiekszenie jakosci terenu
+g - zmniejszenie jakosci terenu
+
+z - zwiekszenie intensywnosci mgly
+x - zmniejszenie intensywnosci mgly
+
+1 - zwiekszenie szybkosci poruszania kamery
+2 - zmniejszczenie szybkosci poruszania kamery
+
+3 - zwiekszenie szybkosci obracania kamery
+4 - zmniejszenie szybkosci obracania kamery

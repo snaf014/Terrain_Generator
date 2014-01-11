@@ -2,6 +2,7 @@
 #define TOOLLIB_H
 
 #include <math.h>
+#include <GL\gl.h>
 
 typedef unsigned int uint;
 typedef int sint;
@@ -24,5 +25,8 @@ float dec2rad (float);
 // wartiœci ujemne na zero
 unsigned int unsign (int);
 #define us(a) (((a)<0) ? 0 : (a))
+
+void drawBox (float, float, float, float, float, float, float, float, float); // funkcja pomocnicza
+void drawCube (float, float, float, float);
 
 #endif

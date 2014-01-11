@@ -4,11 +4,11 @@
 CPP      = g++.exe
 CC       = gcc.exe
 WINDRES  = windres.exe
-OBJ      = bin/obj/camera.o bin/obj/GLSLshader.o bin/obj/main.o bin/obj/toollib.o bin/obj/PerlinNoise.o
-LINKOBJ  = bin/obj/camera.o bin/obj/GLSLshader.o bin/obj/main.o bin/obj/toollib.o bin/obj/PerlinNoise.o
+OBJ      = bin/obj/camera.o bin/obj/GLSLshader.o bin/obj/main.o bin/obj/toollib.o bin/obj/PerlinNoise.o bin/obj/chunk.o bin/obj/chunkManager.o bin/obj/frustum.o
+LINKOBJ  = bin/obj/camera.o bin/obj/GLSLshader.o bin/obj/main.o bin/obj/toollib.o bin/obj/PerlinNoise.o bin/obj/chunk.o bin/obj/chunkManager.o bin/obj/frustum.o
 LIBS     = -L"C:/Program Files/Dev-Cpp/MinGW32/lib" -L"C:/Program Files/Dev-Cpp/MinGW32/mingw32/lib" -L"C:/Program Files/Dev-Cpp/lib" -static-libstdc++ -static-libgcc -L"C:/Program Files/Dev-Cpp/lib" -L"C:/Program Files/Dev-Cpp/MinGW32/lib" -lglfw3 -lopengl32 -lglew32 -lglu32 -lwinmm  -lgdi32 -lgomp 
-INCS     = -I"C:/Program Files/Dev-Cpp/MinGW32/include" -I"C:/Program Files/Dev-Cpp/include" -I"C:/Program Files/Dev-Cpp/include" -I"C:/Program Files/Dev-Cpp/MinGW32/include"
-CXXINCS  = -I"C:/Program Files/Dev-Cpp/MinGW32/include" -I"C:/Program Files/Dev-Cpp/MinGW32/lib/gcc/mingw32/4.7.2/include/c++" -I"C:/Program Files/Dev-Cpp/include" -I"C:/Program Files/Dev-Cpp/include" -I"C:/Program Files/Dev-Cpp/MinGW32/include"
+INCS     = -I"C:/Program Files/Dev-Cpp/MinGW32/include" -I"C:/Program Files/Dev-Cpp/include" -I"C:/Program Files/Dev-Cpp/include" -I"C:/Program Files/Dev-Cpp/MinGW32/include" -I"include"
+CXXINCS  = -I"C:/Program Files/Dev-Cpp/MinGW32/include" -I"C:/Program Files/Dev-Cpp/MinGW32/lib/gcc/mingw32/4.7.2/include/c++" -I"C:/Program Files/Dev-Cpp/include" -I"C:/Program Files/Dev-Cpp/include" -I"C:/Program Files/Dev-Cpp/MinGW32/include" -I"include"
 BIN      = bin/fractterr.exe
 CXXFLAGS = $(CXXINCS) -fopenmp
 CFLAGS   = $(INCS) -fopenmp
@@ -38,3 +38,12 @@ bin/obj/toollib.o: source/toollib.cpp
 
 bin/obj/PerlinNoise.o: source/PerlinNoise.cpp
 	$(CPP) -c source/PerlinNoise.cpp -o bin/obj/PerlinNoise.o $(CXXFLAGS)
+
+bin/obj/chunk.o: source/chunk.cpp
+	$(CPP) -c source/chunk.cpp -o bin/obj/chunk.o $(CXXFLAGS)
+
+bin/obj/chunkManager.o: source/chunkManager.cpp
+	$(CPP) -c source/chunkManager.cpp -o bin/obj/chunkManager.o $(CXXFLAGS)
+
+bin/obj/frustum.o: source/frustum.cpp
+	$(CPP) -c source/frustum.cpp -o bin/obj/frustum.o $(CXXFLAGS)
